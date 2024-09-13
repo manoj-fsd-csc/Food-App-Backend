@@ -59,11 +59,12 @@ const getProductByFirm = async(req,res) =>{
         const restaurentId= firm._id;
         const restaurentArea = firm.area;
         const restaurentImage = firm.image;
+        const restaurentCategory = firm.category;
         
         const products = await Product.find({firm:firmId})
         console.log("product details API :",products)
         
-        res.status(200).json({restaurentName,restaurentArea,restaurentImage,restaurentId,products})
+        res.status(200).json({restaurentName,restaurentArea,restaurentImage,restaurentId,restaurentCategory,products})
     } catch (error) {
         console.error(error)
         res.status(500).json({error:"Internal Server Error"})
