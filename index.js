@@ -16,6 +16,14 @@ const PORT = process.env.PORT || 4000;
 dotEnv.config();
 app.use(cors());
 
+// Serve static files from the React build folder
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Catch-all handler to direct all routes to index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("MONGO DB CONNECTED SUCCEFULLY"))
 .catch((error)=>console.log(error))
